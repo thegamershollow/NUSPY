@@ -68,6 +68,8 @@ appbase = 'http://ccs.cdn.c.shop.nintendowifi.net/ccs/download/' + tid
 os.makedirs(tid, exist_ok=True)
 base = appbase
 if tid[4:8] not in app_categories:
+    base = sysbase
+    os.system('rmdir ' + tid +'/')
     print('Downloading updates is currently unavalible')
     sys.exit(1)
 
