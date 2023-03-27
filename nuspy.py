@@ -70,7 +70,7 @@ base = appbase
 if tid[4:8] not in app_categories:
     base = sysbase
     print('Downloading CETK (title.tik)...')
-    with open('/Downloads' + tid + '/title.tik', 'wb') as f:
+    with open(tid + '/title.tik', 'wb') as f:
         download(base + '/cetk', False, f)
 
 print('Downloading TMD (title.tmd)...')
@@ -89,24 +89,24 @@ for c in range(count):
         # content size
         struct.unpack('>Q', tmd[0xB0C + (0x30 * c):0xB0C + (0x30 * c) + 0x8])[0],
     ])
-with open('/Downloads' + tid + '/title.tmd', 'wb') as f:
+with open(tid + '/title.tmd', 'wb') as f:
     f.write(tmd)
 
 total_size = sum(c[2] for c in contents)
 print("Total size: 0x{:X} ({} MiB)".format(total_size, total_size / (1024 ** 2)))
 
 print('Writing cert (title.cert)...')
-with open('/Downloads' + tid + '/title.cert', 'wb') as f:
+with open(tid + '/title.cert', 'wb') as f:
     f.write(zlib.decompress(base64.b64decode(titlecert)))
 
 for c in contents:
-    if os.path.isfile('/Downloads' + tid + '/' + c[0] + '.app') and os.path.getsize(tid + '/' + c[0] + '.app') == c[2]:
+    if os.path.isfile(tid + '/' + c[0] + '.app') and os.path.getsize(tid + '/' + c[0] + '.app') == c[2]:
         print('Skipping {}.app due to existing file with proper size'.format(c[0]))
     else:
-        with open('/Downloads' + tid + '/' + c[0] + '.app', 'wb') as f:
+        with open(tid + '/' + c[0] + '.app', 'wb') as f:
             download(base + '/' + c[0], True, f, 'Downloading: {}.app...'.format(c[0]), '({}) MiB)'.format(c[2] / (1024 ** 2)))
     if c[1] & 0x2:
-        with open('/Downloads' + tid + '/' + c[0] + '.h3', 'wb') as f:
+        with open(tid + '/' + c[0] + '.h3', 'wb') as f:
             download(base + '/' + c[0] + '.h3', True, f, 'Downloading: {}.h3...'.format(c[0]))
 
 print('Succesfully Downloaded: ' + tid)
