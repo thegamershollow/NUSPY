@@ -108,3 +108,5 @@ for c in contents:
     if c[1] & 0x2:
         with open('/Downloads' + tid + '/' + c[0] + '.h3', 'wb') as f:
             download(base + '/' + c[0] + '.h3', True, f, 'Downloading: {}.h3...'.format(c[0]))
+
+print('Succesfully Downloaded: ' + tid)
