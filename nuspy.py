@@ -68,10 +68,8 @@ appbase = 'http://ccs.cdn.c.shop.nintendowifi.net/ccs/download/' + tid
 os.makedirs(tid, exist_ok=True)
 base = appbase
 if tid[4:8] not in app_categories:
-    base = sysbase
-    print('Downloading CETK (title.tik)...')
-    with open(tid + '/title.tik', 'wb') as f:
-        download(base + '/cetk', False, f)
+    print('Downloading updates is currently unavalible')
+    sys.exit(1)
 
 print('Downloading TMD (title.tmd)...')
 # this is a mess how can i make it better
