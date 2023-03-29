@@ -94,7 +94,7 @@ def main(title_id: str, title_key: str, version: str = None):
     root_dir.mkdir(exist_ok=True)
             
     tmd_url = f'{base_url}/tmd{"." + version if version else ""}'
-    tmd = download(tmd_url, f'Downlading: title.tmd...') # this msg appearing early is annoying, but idc enough to fix it
+    tmd = download(tmd_url, f'Downloading: title.tmd...') # this msg appearing early is annoying, but idc enough to fix it
     contents = get_contents(tmd)
     
     with open(root_dir / 'title.tmd', 'wb') as f:
@@ -106,7 +106,7 @@ def main(title_id: str, title_key: str, version: str = None):
     # If title is an update, get ticket from NUS
     if '000E' in title_id[4:8]:
         tik_url = f"{base_url}/cetk{('.' + version) if version else ''}"
-        tik = download(tik_url, f'Downlading: title.tik...')
+        tik = download(tik_url, f'Downloading: title.tik...')
         
         with open(root_dir / 'title.tik', 'wb') as f:
             f.write(tik)
