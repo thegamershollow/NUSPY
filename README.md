@@ -12,7 +12,4 @@ Updates still work fine, lol
   
 To get the title id of a title you want go [HERE](https://thegamershollow.github.io/Wii-U-Title-Database/)
 
-## How to use nusdecrypt.py
 
-Type this into the command line/terminal/command prompt  
-        python nusextract.py
