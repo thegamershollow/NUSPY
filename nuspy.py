@@ -80,6 +80,8 @@ def main(title_id: str, title_key: str, version: str = None):
         print('Title ID or Title Key is invalid length. Expected length: 16 or 32.')
         print(f'usage: {sys.argv[0]} <titleid> <titlekey>')
         print('Latest version is downloaded, if no version is specified.')
+        print('If you do not know where to get the title id/title key of a game go to http://wiiubrew.org/wiki/Title_database')
+        print('This tool is for software archival purposes only, thegamershollow does not condone piracy of any kind as it is illigal.')
         sys.exit(1)
 
     app_categories = {'0000', '0002', '000C', '000E'}
