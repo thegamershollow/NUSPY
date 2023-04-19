@@ -1,7 +1,7 @@
-# WiiU-NUSPY
-A python based wiiu game/update/dlc downloader
+# NUSPY
+A python based Nintendo Wii U / 3DS game/update/dlc downloader
 
-## How to use nuspy.py
+## How to use nuspy.py **currently for Wii U only**
 
 Type this into the command line/teminal/command prompt  
 
@@ -11,5 +11,3 @@ Type this into the command line/teminal/command prompt
 Updates still work fine, lol  
   
 To get the title id and/or title key of a game/software you want, go to [thegamershollow.github.io/wiiu-tdb/](https://thegamershollow.github.io/wiiu-tdb/)
-
-
