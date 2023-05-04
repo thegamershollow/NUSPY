@@ -1,7 +1,6 @@
 import os, struct, base64, \
-       binascii, sys, urllib.error, \
-       urllib.request, zlib, pathlib, \
-       requests, colorama
+       binascii, sys, zlib, \
+       pathlib, requests, colorama
 
 ## Set up graceful script exiting ##
 def exit_gracefully(signum=None, frame=None):
@@ -175,7 +174,7 @@ thegamershollow does not condone piracy of any kind as it is illegal.")
         sys.exit(1)
 
     # Get title key from NUSPY-Lib
-    url = "https://raw.githubusercontent.com/Korozin/NUSPY-Lib/main/lib" # Using Korozin lib for now
+    url = "https://raw.githubusercontent.com/thegamershollow/NUSPY-Lib/main/lib" # Using Korozin lib for now
     response = requests.get(url)
     content = response.text
     key_value_pairs = {}
@@ -321,31 +320,30 @@ def get_contents(tmd):
 
 # Function that downloads the files
 def download(url: str, message: str, message_suffix: str = "") -> bytes:
-    with urllib.request.urlopen(url) as response:
-        downloaded_content = b""
-        total_size = int(response.headers.get("content-length", 0))
-        
-        # Download content in chunks
-        if not total_size:
-            downloaded_content = response.read()
-        else:
-            print(message, end="", flush=True)
-            downloaded_size = 0
-            while True:
-                chunk = response.read(MAX_BLOCK_SIZE)
-                if not chunk:
-                    break
-                downloaded_content += chunk
-                downloaded_size += len(chunk)
-                
-                # Show download progress
-                percent = round(downloaded_size * 100.0 / total_size, 1)
-                downloaded_size_mb = downloaded_size / (1024 ** 2)
-                total_size_mb = total_size / (1024 ** 2)
-                progress_text = f"\r{message} ({downloaded_size_mb:.2f} MiB / {total_size_mb:.2f} MiB) ({percent}%) {message_suffix}"
-                print(progress_text, end="", flush=True)
-            print("")
+    response = requests.get(url, stream=True)
+    response.raise_for_status()
+    
+    downloaded_content = b""
+    total_size = int(response.headers.get("content-length", 0))
+    
+    # Download content in chunks
+    if not total_size:
+        downloaded_content = response.content
+    else:
+        print(message, end="", flush=True)
+        downloaded_size = 0
+        for chunk in response.iter_content(chunk_size=MAX_BLOCK_SIZE):
+            downloaded_content += chunk
+            downloaded_size += len(chunk)
             
+            # Show download progress
+            percent = round(downloaded_size * 100.0 / total_size, 1)
+            downloaded_size_mb = downloaded_size / (1024 ** 2)
+            total_size_mb = total_size / (1024 ** 2)
+            progress_text = f"\r{message} ({downloaded_size_mb:.2f} MiB / {total_size_mb:.2f} MiB) ({percent}%) {message_suffix}"
+            print(progress_text, end="", flush=True)
+        print("")
+        
     return downloaded_content
 
 
