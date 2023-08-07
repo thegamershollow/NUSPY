@@ -1,6 +1,6 @@
 import os, struct, base64, \
-       binascii, sys, zlib, \
-       pathlib, requests, colorama
+    binascii, sys, zlib, \
+    pathlib, requests, colorama
 
 ## Set up graceful script exiting ##
 def exit_gracefully(signum=None, frame=None):
@@ -357,10 +357,11 @@ if __name__ == "__main__":
     # Call the main function with the specified arguments
     try:
         main(title_id=sys.argv[1].upper(),
-             version=sys.argv[2] if len(sys.argv) > 2 else None)
+            version=sys.argv[2] if len(sys.argv) > 2 else None)
     except IndexError:
         # Handle invalid number of arguments
         print(colorama.Fore.RED + "Invalid number of arguments")
         print(f"Usage: {sys.argv[0]} <titleid>")
-        print("Latest version is downloaded if no version is specified.")
+        print("Latest version  of the title is downloaded if no version is specified.")
+        print("For help go to https://github.com/thegamershollow/NUSPY/wiki")
         sys.exit(1)
