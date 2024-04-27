@@ -1,6 +1,6 @@
 # NUSPY
 A python based Nintendo Wii U / 3DS game/update/dlc downloader
-
+**This tool is currently broken and i have no idea how to fix it**
 ## How to use nuspy.py **currently for Wii U only**
 
 Type this into the command line/teminal/command prompt  
