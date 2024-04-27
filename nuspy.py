@@ -29,6 +29,11 @@ except (ImportError, AttributeError):
 ## Set up graceful script exiting ##
 
 ## Define global vars ##
+"""
+Lower = more responsive, but slower dl speed.
+Higher = less responsive, but higher dl speed.
+for most stability, only change last multipulcation value (EX: 10 * 1024 * X)
+"""
 
 MAX_BLOCK_SIZE = 131072
 
@@ -51,11 +56,33 @@ TIK_OFFSET = 0x140
 
 ## Using slightly modified ticket patching from FunKiiU ##
 def patch_ticket(ticket_data, offset, data):
+    """
+    Patch a Wii U ticket with the given data.
+
+    Parameters:
+        ticket_data (bytearray): The ticket data to be patched.
+        offset (int): The offset to start the patching.
+        data (bytes): The data to be patched in.
+
+    Returns:
+        None
+    """
     ticket_offset_start = TIK_OFFSET + offset
     ticket_offset_end = ticket_offset_start + len(data)
     ticket_data[ticket_offset_start:ticket_offset_end] = data
 
 def patch_ticket_demo(ticket_data):
+    """
+    This function takes a Wii U ticket data and patches it with demo data.
+
+    Parameters:
+        ticket_data (bytearray): The ticket data to be patched.
+        offset (int): The offset to start the patching.
+        demo_data (bytes): The data to be patched in.
+
+    Returns:
+        None
+    """
     # Offset to patch
     offset = 0x124
     
@@ -67,6 +94,17 @@ def patch_ticket_demo(ticket_data):
 
 
 def patch_ticket_dlc(ticket_data):
+    """
+    This function takes a Wii U ticket data and patches it with DLC data.
+
+    Parameters:
+        ticket_data (bytearray): The ticket data to be patched.
+        offset (int): The offset to start the patching.
+        dlc_data (bytes): The data to be patched in.
+
+    Returns:
+        None
+    """
     # Offset to patch
     offset = 0x164
     
@@ -79,6 +117,16 @@ def patch_ticket_dlc(ticket_data):
 
 
 def generate_ticket(title_id, title_key, title_version, full_output_path, patch_demo=False, patch_dlc=False):
+    """
+    This function generates a Wii U ticket for a given title ID, title key, and title version.
+
+    title_id: The ID of the title.
+    title_key: The key of the title.
+    title_version: The version of the title.
+    full_output_path: The path to save the ticket.
+    patch_demo: A flag indicating whether to patch the ticket with demo data.
+    patch_dlc: A flag indicating whether to patch the ticket with DLC data.
+    """
     # Create an empty bytearray to store the ticket data
     ticket_data = bytearray(TIK_DATA)
     
