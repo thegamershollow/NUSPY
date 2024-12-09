@@ -151,7 +151,9 @@ thegamershollow does not condone piracy of any kind as it is illegal.")
     suffix = {"0000": "_Game", "000E": "_Update", "000C": "_DLC", "0002": "_Demo"}.get(
         title_id[4:8], ""
     )
-    root_dir = pathlib.Path(title_id + suffix)
+    downloads_dir = pathlib.Path("Downloads")
+    downloads_dir.mkdir(exist_ok=True)
+    root_dir = pathlib.Path("Downloads/" + title_id + suffix)
     root_dir.mkdir(exist_ok=True)
 
     # Download title.tmd
