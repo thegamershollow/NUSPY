@@ -1,2 +1,4 @@
 # ignore downloads dir
 Downloads/
+# ignore python virtual environment
+.venv/
