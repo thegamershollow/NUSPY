@@ -317,5 +317,4 @@ if __name__ == "__main__":
         print(colorama.Fore.RED + "Invalid number of arguments")
         print(f"Usage: {sys.argv[0]} <titleid>")
         print("Latest version  of the title is downloaded if no version is specified.")
-        print("For help go to https://github.com/thegamershollow/NUSPY/wiki")
         sys.exit(1)
